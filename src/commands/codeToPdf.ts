@@ -1,13 +1,22 @@
 import * as vscode from "vscode";
 import { createServer } from "http";
-import { readFile } from "fs";
+import { promises, statSync, readFile } from "fs";
+
 import { join } from "path";
 import { convertHtmlToPdf } from "../utils/convertHtmlToPdf";
+import { TreeNode } from "../models/treeNode";
+import { buildTree } from "../utils/buildTree";
 
 export async function printDefinitionsForActiveEditor(uri: vscode.Uri) {
-  console.log(uri);
-  const activeEditor = vscode.window.activeTextEditor;
-  const text = activeEditor?.document.getText();
+  console.log(uri.fsPath);
+  let text = "";
+  let tree: TreeNode | undefined = undefined;
+  if (statSync(uri.fsPath).isDirectory()) {
+    tree = buildTree(uri.fsPath);
+  } else {
+    text = await promises.readFile(uri.fsPath, { encoding: "utf-8" });
+  }
+  console.log(tree);
   createServer(function (req, res) {
     console.log(req.url);
     switch (req.url) {
