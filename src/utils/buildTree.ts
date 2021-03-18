@@ -1,8 +1,8 @@
-import { readdirSync, statSync } from "fs";
-import { extname } from "path";
+import { promises, statSync } from "fs";
+import { extname, join } from "path";
 import { TreeNode } from "../models/treeNode";
 
-export function buildTree(rootPath: string) {
+export async function buildTree(rootPath: string) {
   const BLOCKED_EXTENSIONS = [".txt"];
   const root = new TreeNode(rootPath);
 
@@ -12,15 +12,19 @@ export function buildTree(rootPath: string) {
     const currentNode = stack.pop();
 
     if (currentNode) {
-      const children = readdirSync(currentNode.path);
-
+      const children = await promises.readdir(currentNode.path);
+      const filePromises = [];
       for (let child of children) {
-        const childPath = `${currentNode.path}/${child}`;
+        const childPath = join(currentNode.path, child);
         const childNode = new TreeNode(childPath);
 
         const isDirectory = statSync(childNode.path).isDirectory();
         const extension = extname(childNode.path);
-        childNode.ext = isDirectory ? undefined : extension;
+        childNode.ext = isDirectory ? undefined : extension.substring(1);
+        filePromises.push({
+          id: childPath,
+          code: isDirectory ? undefined : promises.readFile(childPath, "utf-8"),
+        });
         const isFileBockled = BLOCKED_EXTENSIONS.includes(extension);
 
         if (!isFileBockled) {
@@ -31,6 +35,15 @@ export function buildTree(rootPath: string) {
           stack.push(childNode);
         }
       }
+      const data = await Promise.all(
+        filePromises.map(async (fp) => {
+          return { id: fp.id, code: await fp.code };
+        })
+      );
+
+      data.forEach((fileData, ind) => {
+        currentNode.children[ind].code = fileData.code;
+      });
     }
   }
 

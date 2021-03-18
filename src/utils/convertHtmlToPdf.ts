@@ -12,6 +12,7 @@ export async function convertHtmlToPdf(url: string) {
       "downloads",
       "code.pdf"
     ),
+    format: "a3",
   });
   browser.close();
 }
