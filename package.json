@@ -14,6 +14,20 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "CodeToPdf",
+      "properties": {
+        "codeToPdf.setDownloadPath": {
+          "type": "string",
+          "description": "Set the download path where the PDF should be downloaded"
+        },
+        "codeToPdf.openHTMLPageInBrowser": {
+          "type": "boolean",
+          "description": "If true it opens a browser window with the HTML page which will be converted",
+          "default": false
+        }
+      }
+    },
     "commands": [
       {
         "command": "codetopdf.convert",

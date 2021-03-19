@@ -1,4 +1,9 @@
-out
+out/commands
+out/models
+out/test
+out/utils
+out/extension.js
+out/extension.js.map
 dist
 node_modules
 .vscode-test/
