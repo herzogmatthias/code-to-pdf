@@ -1,3 +1,8 @@
+/**
+ * Tree in case someone wants to convert a directory
+ *
+ * @class TreeNode
+ */
 export class TreeNode {
   public path: string;
   public ext?: string;
