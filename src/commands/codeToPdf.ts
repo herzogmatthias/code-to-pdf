@@ -2,25 +2,17 @@ import * as vscode from "vscode";
 import { createServer } from "http";
 import { promises, statSync, readFile } from "fs";
 
-import { join, extname } from "path";
+import { join, extname, sep } from "path";
 import { convertHtmlToPdf } from "../utils/convertHtmlToPdf";
 import { TreeNode } from "../models/treeNode";
 import { buildTree } from "../utils/buildTree";
+import { Settings } from "../models/settings";
 
-export async function printDefinitionsForActiveEditor(uri: vscode.Uri) {
-  const openHTMLPage = vscode.workspace
-    .getConfiguration()
-    .get("codeToPdf.openHTMLPageInBrowser");
+export async function codeToPdf(uri: vscode.Uri) {
+  const settings = new Settings(vscode.workspace.getConfiguration());
   console.log(uri.fsPath);
   let isDir = statSync(uri.fsPath).isDirectory();
-  let downloadDir = isDir
-    ? uri.fsPath
-    : join(...uri.path.split("/").splice(0, uri.path.split("/").length - 1));
   let tree: TreeNode | undefined = undefined;
-  let defaultName: string = isDir
-    ? uri.path.split("/")[uri.path.split("/").length - 1]
-    : uri.path.split("/")[uri.path.split("/").length - 1].split(".")[0];
-  defaultName += "_code.pdf";
   let flattendArray: Array<TreeNode> = [];
   if (isDir) {
     tree = await buildTree(uri.fsPath);
@@ -69,16 +61,12 @@ export async function printDefinitionsForActiveEditor(uri: vscode.Uri) {
     }
   }).listen(0);
 
-  if (openHTMLPage) {
+  if (settings.openHTMLPageInBrowser) {
     vscode.env.openExternal(
       vscode.Uri.parse(`http://localhost:${(server.address()! as any).port}`)
     );
   }
 
-  await convertHtmlToPdf(
-    `http://localhost:${(server.address()! as any).port}`,
-    downloadDir,
-    defaultName
-  );
+  await convertHtmlToPdf(`http://localhost:${(server.address()! as any).port}`);
   server.close();
 }

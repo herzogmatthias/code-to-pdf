@@ -3,7 +3,17 @@ import { extname, join } from "path";
 import { TreeNode } from "../models/treeNode";
 
 export async function buildTree(rootPath: string) {
-  const BLOCKED_EXTENSIONS = [".txt"];
+  const BLOCKED_EXTENSIONS = [
+    ".txt",
+    ".pdf",
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".xlsx",
+    ".docx",
+    ".pptx",
+    ".icon",
+  ];
   const root = new TreeNode(rootPath);
 
   const stack = [root];
@@ -21,14 +31,17 @@ export async function buildTree(rootPath: string) {
         const isDirectory = statSync(childNode.path).isDirectory();
         const extension = extname(childNode.path);
         childNode.ext = isDirectory ? undefined : extension.substring(1);
-        filePromises.push({
-          id: childPath,
-          code: isDirectory ? undefined : promises.readFile(childPath, "utf-8"),
-        });
+
         const isFileBockled = BLOCKED_EXTENSIONS.includes(extension);
 
         if (!isFileBockled) {
           currentNode.children.push(childNode);
+          filePromises.push({
+            id: childPath,
+            code: isDirectory
+              ? undefined
+              : promises.readFile(childPath, "utf-8"),
+          });
         }
 
         if (isDirectory && !isFileBockled) {
