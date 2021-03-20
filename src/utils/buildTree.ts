@@ -1,6 +1,6 @@
 import { promises, statSync } from "fs";
 import { extname, join } from "path";
-import { TreeNode } from "../models/treeNode";
+import { TreeNode } from "../models/TreeNode";
 
 export async function buildTree(rootPath: string) {
   const BLOCKED_EXTENSIONS = [
