@@ -1,4 +1,9 @@
-# Code to PDF README
+# Code to PDF
+
+<p align="center">
+<img width="50%" src="images/CodeToPdfLogo.svg">
+<hr/>
+</p>
 
 [![.github/workflows/testing.yaml](https://github.com/herzogmatthias/code-to-pdf/actions/workflows/testing.yaml/badge.svg)](https://github.com/herzogmatthias/code-to-pdf/actions/workflows/testing.yaml)
 
@@ -17,5 +22,8 @@ This extension contributes the following settings:
 - `codeToPdf.openHTMLPageInBrowser`
   - default: `false`
   - opens a browser window with the html which will be converted to pdf
+- `codeToPdf.ignoredFileExtensions`
+  - default: `[".txt", ".pdf",".jpg",".jpeg",".png",".xlsx",".docx",".pptx",".ico"]`
+  - Stores file extensions which will be ignored when converting to pdf e.g. ['.html']
 
 ## Release Notes

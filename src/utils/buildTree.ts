@@ -1,19 +1,11 @@
 import { promises, statSync } from "fs";
 import { extname, join } from "path";
+import { Settings } from "../models/Settings";
 import { TreeNode } from "../models/TreeNode";
+import * as vscode from "vscode";
 
 export async function buildTree(rootPath: string) {
-  const BLOCKED_EXTENSIONS = [
-    ".txt",
-    ".pdf",
-    ".jpg",
-    ".jpeg",
-    ".png",
-    ".xlsx",
-    ".docx",
-    ".pptx",
-    ".icon",
-  ];
+  const settings = Settings.getInstance(vscode.workspace.getConfiguration());
   const root = new TreeNode(rootPath);
 
   const stack = [root];
@@ -32,7 +24,9 @@ export async function buildTree(rootPath: string) {
         const extension = extname(childNode.path);
         childNode.ext = isDirectory ? undefined : extension.substring(1);
 
-        const isFileBockled = BLOCKED_EXTENSIONS.includes(extension);
+        const isFileBockled = settings.ignoredFileExtensions!.includes(
+          extension
+        );
 
         if (!isFileBockled) {
           currentNode.children.push(childNode);

@@ -4,7 +4,7 @@ import { ServerManager } from "../models/ServerManager";
 import { Settings } from "../models/Settings";
 
 export async function codeToPdf(uri: vscode.Uri) {
-  const settings = new Settings(vscode.workspace.getConfiguration());
+  const settings = Settings.getInstance(vscode.workspace.getConfiguration());
   console.log(uri.fsPath);
 
   const serverManager = new ServerManager(uri);

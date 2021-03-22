@@ -1,5 +1,4 @@
 import { writeFileSync } from "fs";
-import { join } from "path";
 import { launch } from "puppeteer";
 import { window } from "vscode";
 

@@ -22,6 +22,21 @@
           "type": "boolean",
           "description": "If true it opens a browser window with the HTML page which will be converted",
           "default": false
+        },
+        "codeToPdf.ignoredFileExtensions": {
+          "type": "array",
+          "description": "Stores file extensions which will be ignored when converting to pdf e.g. ['.html']",
+          "default": [
+            ".txt",
+            ".pdf",
+            ".jpg",
+            ".jpeg",
+            ".png",
+            ".xlsx",
+            ".docx",
+            ".pptx",
+            ".ico"
+          ]
         }
       }
     },
