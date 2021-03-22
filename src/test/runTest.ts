@@ -1,12 +1,12 @@
 import * as path from "path";
 
-import { runTests } from "vscode-test";
+import { downloadAndUnzipVSCode, runTests } from "vscode-test";
 
 async function main() {
   try {
     // The folder containing the Extension Manifest package.json
     // Passed to `--extensionDevelopmentPath`
-    const extensionDevelopmentPath = path.resolve(__dirname, "../../");
+    let extensionDevelopmentPath = path.resolve(__dirname, "../../");
 
     // The path to test runner
     // Passed to --extensionTestsPath
@@ -15,6 +15,13 @@ async function main() {
     // Download VS Code, unzip it and run the integration test
     await runTests({
       version: "1.40.0",
+      extensionDevelopmentPath,
+      extensionTestsPath,
+    });
+
+    extensionDevelopmentPath = await downloadAndUnzipVSCode("stable");
+    await runTests({
+      version: "stable",
       extensionDevelopmentPath,
       extensionTestsPath,
     });
