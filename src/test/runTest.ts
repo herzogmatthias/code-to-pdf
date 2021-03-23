@@ -1,6 +1,6 @@
 import * as path from "path";
 
-import { downloadAndUnzipVSCode, runTests } from "vscode-test";
+import { runTests } from "vscode-test";
 
 async function main() {
   try {
@@ -19,7 +19,6 @@ async function main() {
       extensionTestsPath,
     });
 
-    extensionDevelopmentPath = await downloadAndUnzipVSCode("stable");
     await runTests({
       version: "stable",
       extensionDevelopmentPath,

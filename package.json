@@ -4,6 +4,17 @@
   "description": "Generate a Pdf from Code",
   "version": "0.0.1",
   "publisher": "herzogmatthias",
+  "repository": {
+    "url": "https://github.com/herzogmatthias/code-to-pdf"
+  },
+  "keywords": [
+    "pdf",
+    "code to pdf",
+    "convert",
+    "convert code",
+    "code"
+  ],
+  "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.40.0"
   },
