@@ -5,7 +5,7 @@ import { Settings } from "../models/Settings";
 
 export async function codeToPdf(uri: vscode.Uri) {
   const settings = Settings.getInstance(vscode.workspace.getConfiguration());
-  console.log(uri.fsPath);
+  vscode.window.showInformationMessage("Starting with the convertion!");
 
   const serverManager = new ServerManager(uri);
 

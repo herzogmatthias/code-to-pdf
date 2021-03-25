@@ -11,7 +11,12 @@ export async function convertHtmlToPdf(url: string) {
       format: "a3",
     });
     window.showSaveDialog({ filters: { pdf: ["pdf"] } }).then((fileInfo) => {
-      writeFileSync(fileInfo!.fsPath, pdf);
+      try {
+        writeFileSync(fileInfo!.fsPath, pdf);
+      } catch (e) {
+        console.log(e);
+        window.showErrorMessage("Something went wrong when saving the Files");
+      }
     });
   } catch (e) {
     console.log(e);

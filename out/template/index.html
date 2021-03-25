@@ -48,7 +48,7 @@
           if(Array.isArray(data)) {
             console.log(data);
             for(let file of data) {
-              const pathArray = file.path.split('\\');
+              const pathArray = file.path.split('/');
             document.querySelector("body").innerHTML += `
             <div class="code-block">
       <pre><code class="lang-${file.ext}">/* \n name: ${pathArray[pathArray.length -1]}\n path: ${file.path} \n*/</code> </pre>
@@ -57,7 +57,7 @@
             `
             }
           } else {
-            const pathArray = data.path.split('\\');
+            const pathArray = data.path.split('/');
             document.querySelector("body").innerHTML = `
             <div class="code-block">
       <pre><code class="lang-${data.ext}">/* \n name: ${pathArray[pathArray.length -1]}\n path: ${data.path} \n*/</code> </pre>

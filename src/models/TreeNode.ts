@@ -1,3 +1,5 @@
+import { workspace } from "vscode";
+
 /**
  * Tree in case someone wants to convert a directory
  *
@@ -18,7 +20,7 @@ export class TreeNode {
 
   public getFlat({ path, ext, code, children = [] }: TreeNode): any {
     return children.reduce((r, o) => [...r, ...this.getFlat(o)], [
-      { path, ext, code },
+      { path: workspace.asRelativePath(path), ext, code },
     ]);
   }
 }

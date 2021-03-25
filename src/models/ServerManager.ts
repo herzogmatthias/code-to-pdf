@@ -3,7 +3,7 @@ import { createServer } from "http";
 import { promises, readFile, statSync } from "fs";
 import { ServerResponse } from "http";
 import { join, extname } from "path";
-import { Uri } from "vscode";
+import { Uri, workspace } from "vscode";
 import { buildTree } from "../utils/buildTree";
 import { TreeNode } from "./TreeNode";
 
@@ -37,7 +37,7 @@ export class ServerManager {
         .filter((fa: any) => fa.ext !== undefined);
     } else {
       tree = new TreeNode(
-        this.uri.fsPath,
+        workspace.asRelativePath(this.uri.fsPath),
         extname(this.uri.fsPath).substring(1),
         await promises.readFile(this.uri.fsPath, "utf-8")
       );
