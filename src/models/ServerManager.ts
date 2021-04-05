@@ -3,15 +3,21 @@ import { createServer } from "http";
 import { promises, readFile, statSync } from "fs";
 import { ServerResponse } from "http";
 import { join, extname } from "path";
-import { Uri, workspace } from "vscode";
+import { Uri, window, workspace } from "vscode";
 import { buildTree } from "../utils/buildTree";
 import { TreeNode } from "./TreeNode";
 
 export class ServerManager {
   server: Server;
   uri: Uri;
-  constructor(uri: Uri) {
+  htmlPath?: string;
+  constructor(uri: Uri, htmlPath?: string) {
+    if (!uri) {
+      window.showErrorMessage("No valid file path!");
+      throw Error("failed");
+    }
     this.uri = uri;
+    this.htmlPath = htmlPath;
     this.server = createServer(async (req, res) => {
       switch (req.url) {
         case "/":
@@ -26,6 +32,8 @@ export class ServerManager {
     }).listen(0);
   }
   private async sendCode(res: ServerResponse) {
+    console.log(res);
+    console.log(this.uri);
     let isDir = statSync(this.uri.fsPath).isDirectory();
     let tree: TreeNode | undefined = undefined;
     let flattendArray: Array<TreeNode> = [];
@@ -54,8 +62,9 @@ export class ServerManager {
   }
 
   private serveHTML(res: ServerResponse) {
+    console.log(this.htmlPath);
     readFile(
-      join(__dirname, "..", "template", "index.html"),
+      this.htmlPath ? this.htmlPath : join(__dirname, "template", "index.html"),
       function (err, data) {
         if (err) {
           res.writeHead(404);

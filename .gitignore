@@ -4,7 +4,8 @@ out/test
 out/utils
 out/extension.js
 out/extension.js.map
-dist
+dist/extension.js
+dist/extension.js.map
 node_modules
 .vscode-test/
 *.vsix

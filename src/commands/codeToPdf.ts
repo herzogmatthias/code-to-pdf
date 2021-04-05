@@ -7,7 +7,9 @@ export async function codeToPdf(uri: vscode.Uri) {
   const settings = Settings.getInstance(vscode.workspace.getConfiguration());
   vscode.window.showInformationMessage("Starting with the convertion!");
 
-  const serverManager = new ServerManager(uri);
+  const serverManager = new ServerManager(
+    uri ? uri : vscode.window.activeTextEditor?.document.uri!
+  );
 
   if (settings.openHTMLPageInBrowser) {
     vscode.env.openExternal(

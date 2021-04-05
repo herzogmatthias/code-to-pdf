@@ -5,6 +5,7 @@ import { window } from "vscode";
 export async function convertHtmlToPdf(url: string) {
   const browser = await launch({ headless: true });
   const page = await browser.newPage();
+  console.log("converting");
   await page.goto(url, { waitUntil: "networkidle0" });
   try {
     const pdf = await page.pdf({

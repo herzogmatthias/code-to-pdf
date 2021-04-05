@@ -9,7 +9,10 @@ suite("Server test Suite", () => {
   const initialPath = join(__dirname, "..", "..");
 
   test("should serve a html page", async () => {
-    const serverManager = new ServerManager(Uri.file(initialPath));
+    const serverManager = new ServerManager(
+      Uri.file(initialPath),
+      join(__dirname, "..", "..", "template", "index.html")
+    );
     const res = await fetch(
       `http://localhost:${(serverManager.server.address()! as any).port}`
     );

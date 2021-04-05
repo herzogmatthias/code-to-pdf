@@ -1,9 +1,9 @@
 # Change Log
 
-All notable changes to the "codetopdf" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
 ## [Unreleased]
 
-- Initial release
+- config-file for configuring things like paths to ignore
+
+| Version | Date       | Changelog       |
+| ------- | ---------- | --------------- |
+| 0.0.1   | 05.04.2021 | Initial Release |

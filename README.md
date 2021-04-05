@@ -1,11 +1,9 @@
 # Code to PDF
 
 <p align="center">
-<img width="50%" src="images/CodeToPdfLogo.svg">
+<img width="50%" src="images/CodeToPdfLogo.png">
 <hr/>
 </p>
-
-[![.github/workflows/testing.yaml](https://github.com/herzogmatthias/code-to-pdf/actions/workflows/testing.yaml/badge.svg)](https://github.com/herzogmatthias/code-to-pdf/actions/workflows/testing.yaml)
 
 This extension can be used to convert your code into a _PDF File_ like it works with **IntelliJ**. It works with single code files as well as with whole Directories.
 
