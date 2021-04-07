@@ -85,6 +85,7 @@
     "@types/node": "^12.11.7",
     "@types/node-fetch": "^2.5.8",
     "@types/vscode": "^1.40.0",
+    "@types/which": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
     "chai": "^4.3.4",
@@ -100,7 +101,7 @@
     "webpack-cli": "^4.6.0"
   },
   "dependencies": {
-    "puppeteer": "^8.0.0",
+    "puppeteer-core": "^8.0.0",
     "utf-8-validate": "^5.0.4"
   },
   "announcement": {
