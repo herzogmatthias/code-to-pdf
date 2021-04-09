@@ -9,7 +9,7 @@ export async function getOSSpecificPath() {
       return await getPathWindows();
 
     case "darwin":
-      return await getPathLinux();
+      return "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome";
 
     default:
       return await getPathLinux();
