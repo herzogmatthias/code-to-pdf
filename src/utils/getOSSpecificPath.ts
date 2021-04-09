@@ -8,7 +8,7 @@ export async function getOSSpecificPath() {
   switch (process.platform) {
     case "win32":
       return await getPathWindows();
-      break;
+
     case "darwin":
       break;
     default:
