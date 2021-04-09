@@ -8,7 +8,7 @@ suite("Browser Execution Path test Suite", () => {
     if (process.platform === "win32") {
       expect(path).to.include("chrome.exe");
     } else {
-      expect(path).to.be("/usr/bin/google-chrome");
+      expect(path).to.be.eq("/usr/bin/google-chrome");
     }
   });
 });
