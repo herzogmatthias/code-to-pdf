@@ -16,7 +16,7 @@ jobs:
         uses: browser-actions/setup-chrome@latest
       - run: chrome --version
         if: runner.os != 'macOS'
-      - run: google-chrome --version
+      - run: /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --version
         if: runner.os == 'macOS'
       - name: Install Node.js
         uses: actions/setup-node@v1
