@@ -1,5 +1,4 @@
 import { join } from "path";
-import { buildTree } from "../../utils/buildTree";
 import { expect } from "chai";
 import fetch from "node-fetch";
 import { ServerManager } from "../../models/ServerManager";

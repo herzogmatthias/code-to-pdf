@@ -2,12 +2,14 @@ import { writeFileSync } from "fs";
 import { launch } from "puppeteer-core";
 import { window } from "vscode";
 import { getOSSpecificPath } from "./getOSSpecificPath";
+import * as vscode from "vscode";
 export async function convertHtmlToPdf(url: string) {
   const path = await getOSSpecificPath();
   if (!path) {
     window.showErrorMessage(
-      "You do not have the necassary Browser (please use Firefox or Chrome!)"
+      "You do not have the necassary Browser please convert to pdf manually(please use Firefox or Chrome!)"
     );
+    vscode.env.openExternal(vscode.Uri.parse(url));
     return;
   }
   const browser = await launch({

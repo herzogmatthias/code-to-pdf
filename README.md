@@ -1,11 +1,13 @@
 # Code to PDF
 
 <p align="center">
-<img width="50%" src="images/CodeToPdfLogo.png">
+<img width="40%" src="images/CodeToPdfLogo.png">
 <hr/>
 </p>
 
-This extension can be used to convert your code into a _PDF File_ like it works with **IntelliJ**. It works with single code files as well as with whole Directories.
+> :warning: **If you are using Firefox**: Have a look at the known issues [here](#known-issues-when-using-firefox)
+
+This extension can be used to convert your code into a _PDF File_ like it works with **IntelliJ**. It works with single code files as well as with whole Directories. It uses _puppeteer-core_ under the hood so you need **Firefox** or **Chrome** installed.
 
 ## Features
 
@@ -25,3 +27,8 @@ This extension contributes the following settings:
   - Stores file extensions which will be ignored when converting to pdf e.g. ['.html']
 
 ## Release Notes
+
+## Known Issues when using Firefox
+
+- **Firefox cannot be closed with puppeteer**: Because of a locked user profile puppeteer cannot close firefox. The task has to be cancelled manually.
+- **PDF colors can look blurred**: The converted PDF can looked blurred. A workarround is to enable the `openHTMLPageInBrowser` option and convert it manually.
