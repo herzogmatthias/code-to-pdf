@@ -9,9 +9,11 @@ export class Settings {
   private static instance: Settings;
   openHTMLPageInBrowser?: boolean;
   ignoredFileExtensions?: string[];
+  pathForBrowserExec?: string;
 
   private constructor(config: WorkspaceConfiguration) {
     this.openHTMLPageInBrowser = config.get("codeToPdf.openHTMLPageInBrowser");
+    this.pathForBrowserExec = config.get("codeToPdf.pathForBrowserExec");
     this.ignoredFileExtensions = config.get("codeToPdf.ignoredFileExtensions");
   }
   public static getInstance(config: WorkspaceConfiguration): Settings {
@@ -32,6 +34,14 @@ export class Settings {
     ) {
       this.instance.ignoredFileExtensions = config.get(
         "codeToPdf.ignoredFileExtensions"
+      );
+    }
+    if (
+      config.get("codeToPdf.pathForBrowserExec") !==
+      this.instance.pathForBrowserExec
+    ) {
+      this.instance.pathForBrowserExec = config.get(
+        "codeToPdf.pathForBrowserExec"
       );
     }
     return Settings.instance;

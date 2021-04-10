@@ -1,6 +1,9 @@
 import { normalize } from "path";
 import { exec } from "child_process";
 import { promisify } from "util";
+import { existsSync } from "fs";
+import { Settings } from "../models/Settings";
+import { workspace } from "vscode";
 const execPromise = promisify(exec);
 
 export async function getOSSpecificPath() {
@@ -9,7 +12,20 @@ export async function getOSSpecificPath() {
       return await getPathWindows();
 
     case "darwin":
-      return "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome";
+      if (
+        Settings.getInstance(workspace.getConfiguration())
+          .pathForBrowserExec !== ""
+      ) {
+        return Settings.getInstance(workspace.getConfiguration())
+          .pathForBrowserExec;
+      }
+      return existsSync(
+        "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+      )
+        ? "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+        : existsSync("/Applications/Firefox.app/Contents/MacOS/firefox")
+        ? "/Applications/Firefox.app/Contents/MacOS/firefox"
+        : undefined;
 
     default:
       return await getPathLinux();

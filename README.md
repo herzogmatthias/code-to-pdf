@@ -25,6 +25,9 @@ This extension contributes the following settings:
 - `codeToPdf.ignoredFileExtensions`
   - default: `[".txt", ".pdf",".jpg",".jpeg",".png",".xlsx",".docx",".pptx",".ico"]`
   - Stores file extensions which will be ignored when converting to pdf e.g. ['.html']
+- `codeToPdf.pathForBrowserExec`
+  - default: `""`
+  - Usable for MacOS Users when the Browser is not installed in the default location
 
 ## Release Notes
 
