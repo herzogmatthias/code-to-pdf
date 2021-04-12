@@ -20,11 +20,17 @@ export async function getOSSpecificPath() {
           .pathForBrowserExec;
       }
       return existsSync(
-        "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+        normalize(
+          "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+        )
       )
-        ? "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
-        : existsSync("/Applications/Firefox.app/Contents/MacOS/firefox")
-        ? "/Applications/Firefox.app/Contents/MacOS/firefox"
+        ? normalize(
+            "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome"
+          )
+        : existsSync(
+            normalize("/Applications/Firefox.app/Contents/MacOS/firefox")
+          )
+        ? normalize("/Applications/Firefox.app/Contents/MacOS/firefox")
         : undefined;
 
     default:
