@@ -16,8 +16,9 @@ export async function getOSSpecificPath() {
         Settings.getInstance(workspace.getConfiguration())
           .pathForBrowserExec !== ""
       ) {
-        return Settings.getInstance(workspace.getConfiguration())
-          .pathForBrowserExec;
+        return normalize(
+          Settings.getInstance(workspace.getConfiguration()).pathForBrowserExec!
+        );
       }
       return existsSync(
         normalize(
