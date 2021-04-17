@@ -22,11 +22,11 @@ export async function getOSSpecificPath() {
       }
       return existsSync(
         normalize(
-          "/Applications/Google/Chrome.app/Contents/MacOS/Google/Chrome"
+          "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
         )
       )
         ? normalize(
-            "/Applications/Google/Chrome.app/Contents/MacOS/Google/Chrome"
+            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
           )
         : existsSync(
             normalize("/Applications/Firefox.app/Contents/MacOS/firefox")
