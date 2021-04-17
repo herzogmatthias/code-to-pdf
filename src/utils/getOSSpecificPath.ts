@@ -56,14 +56,14 @@ async function getPathWindows() {
   );
   const str = await execCommand(`reg QUERY "${normQuery}" /s`);
   let browser: string | undefined = "";
-  browser = str.match(/\s*chrome.exe/)
-    ? str.match(/\s*chrome.exe/)![0]
-    : str.match(/\s*firefox.exe/)![0];
+  browser = str.match(/REG_SZ\s*.*chrome.exe/)
+    ? str.match(/REG_SZ\s*.*chrome.exe/)![0]
+    : str.match(/REG_SZ\s*.*firefox.exe/)![0];
   if (!browser) {
     return undefined;
   }
 
-  const path = browser.trim().substr(23);
+  const path = browser.trim().substr(6);
   return path.trim();
 }
 
