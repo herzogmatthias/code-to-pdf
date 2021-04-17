@@ -56,9 +56,9 @@ async function getPathWindows() {
   );
   const str = await execCommand(`reg QUERY "${normQuery}" /s`);
   let browser: string | undefined = "";
-  browser = str.match(/\s*(Standard).*chrome.exe/)
-    ? str.match(/\s*(Standard).*chrome.exe/)![0]
-    : str.match(/\s*(Standard).*firefox.exe/)![0];
+  browser = str.match(/\s*chrome.exe/)
+    ? str.match(/\s*chrome.exe/)![0]
+    : str.match(/\s*firefox.exe/)![0];
   if (!browser) {
     return undefined;
   }
