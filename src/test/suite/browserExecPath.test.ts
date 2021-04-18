@@ -19,16 +19,18 @@ suite("Browser Execution Path test Suite", () => {
   });
   test("should start Browser with the right path", async () => {
     const path = await getOSSpecificPath();
+    console.log(path);
     try {
       const browser = await launch({
         headless: true,
 
         executablePath: path,
-        args: ["-wait-for-browser"],
+        args: ["-wait-for-browser", "--no-sandbox"],
       });
       await browser.close();
       assert(true, "Browser is running");
     } catch (e) {
+      console.log(e);
       assert(false, e);
     }
   });
