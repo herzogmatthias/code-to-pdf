@@ -48,7 +48,7 @@ async function getPathLinux() {
   if (!browser) {
     return undefined;
   }
-  return browser.trim();
+  return normalize(browser.trim());
 }
 async function getPathWindows() {
   const normQuery = normalize(
@@ -64,7 +64,7 @@ async function getPathWindows() {
   }
 
   const path = browser.trim().substr(6);
-  return path.trim();
+  return normalize(path.trim());
 }
 
 async function execCommand(command: string) {

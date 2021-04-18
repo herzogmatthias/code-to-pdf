@@ -1,5 +1,7 @@
 import { expect } from "chai";
+import * as assert from "assert";
 import { getOSSpecificPath } from "../../utils/getOSSpecificPath";
+import { launch } from "puppeteer-core";
 
 suite("Browser Execution Path test Suite", () => {
   test("should return correct Path for different OS", async () => {
@@ -13,6 +15,21 @@ suite("Browser Execution Path test Suite", () => {
       );
     } else {
       expect(path).to.be.eq("/usr/bin/google-chrome");
+    }
+  });
+  test("should start Browser with the right path", async () => {
+    const path = await getOSSpecificPath();
+    try {
+      const browser = await launch({
+        headless: true,
+
+        executablePath: path,
+        args: ["-wait-for-browser"],
+      });
+      await browser.close();
+      assert(true, "Browser is running");
+    } catch (e) {
+      assert(false, e);
     }
   });
 });

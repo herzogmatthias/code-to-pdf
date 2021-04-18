@@ -13,7 +13,7 @@ export async function convertHtmlToPdf(url: string) {
     return;
   }
   const browser = await launch({
-    headless: false,
+    headless: true,
 
     executablePath: path,
     args: ["-wait-for-browser"],
