@@ -40,8 +40,11 @@
     }
   </style>
   <script lang="js">
-
+function htmlEntities(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
           document.addEventListener('DOMContentLoaded', (event) => {
+            
             fetch(window.location + 'code').then(function(response) {
           return response.json();
         }).then(function(data) {
@@ -52,7 +55,7 @@
             document.querySelector("body").innerHTML += `
             <div class="code-block">
       <pre><code class="lang-${file.ext}">/* \n name: ${pathArray[pathArray.length -1]}\n path: ${file.path} \n*/</code> </pre>
-      <pre class="line-numbers"><code class="code lang-${file.ext}">${file.code}</code></pre>
+      <pre class="line-numbers"><code class="code lang-${file.ext}">${htmlEntities(file.code)}</code></pre>
     </div>
             `
             }
@@ -61,7 +64,7 @@
             document.querySelector("body").innerHTML = `
             <div class="code-block">
       <pre><code class="lang-${data.ext}">/* \n name: ${pathArray[pathArray.length -1]}\n path: ${data.path} \n*/</code> </pre>
-      <pre class="line-numbers"><code class="code lang-${data.ext}">${data.code}</code></pre>
+      <pre class="line-numbers"><code class="code lang-${data.ext}">${htmlEntities(file.code)}</code></pre>
     </div>
             `
           }

@@ -25,7 +25,7 @@ suite("Browser Execution Path test Suite", () => {
         headless: true,
 
         executablePath: path,
-        args: ["-wait-for-browser", "--no-sandbox", "--disable-gpu"],
+        args: ["-wait-for-browser", "--no-sandbox"],
       });
       await browser.close();
       assert(true, "Browser is running");
