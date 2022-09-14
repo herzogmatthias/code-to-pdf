@@ -13,8 +13,7 @@ export async function getOSSpecificPath() {
 
     case "darwin":
       if (
-        Settings.getInstance(workspace.getConfiguration())
-          .pathForBrowserExec !== ""
+        Settings.getInstance(workspace.getConfiguration()).pathForBrowserExec
       ) {
         return normalize(
           Settings.getInstance(workspace.getConfiguration()).pathForBrowserExec!
