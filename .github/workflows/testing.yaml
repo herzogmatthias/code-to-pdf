@@ -7,7 +7,7 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
@@ -27,7 +27,7 @@ jobs:
       - run: npm install
       - run: npm run pretest
       - run: npm run webpack
-      - run: npm run test
+      - run: xvfb-run -a npm run test
         if: runner.os == 'Linux'
       - run: npm run test
         if: runner.os != 'Linux'
