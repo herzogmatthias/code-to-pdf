@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 import { ServerManager } from "../../models/ServerManager";
 import { Uri } from "vscode";
 
-suite("Server test Suite", () => {
+suite.only("Server test Suite", () => {
   const initialPath = join(__dirname, "..", "..");
 
   test("should serve a html page", async () => {

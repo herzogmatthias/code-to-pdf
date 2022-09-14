@@ -29,7 +29,7 @@ suite("Browser Execution Path test Suite", () => {
       });
       await browser.close();
       assert(true, "Browser is running");
-    } catch (e) {
+    } catch (e: any) {
       console.log(e);
       assert(false, e);
     }

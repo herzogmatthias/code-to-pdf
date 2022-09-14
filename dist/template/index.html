@@ -34,47 +34,58 @@
     ></script>
   </head>
   <style lang="css">
+    @page {
+      margin: 10mm;
+    }
+
     body {
+      line-height: 1.3;
       max-width: 297mm;
       font-size: 11px;
+      margin: 100px 30px 200px 30px;
     }
   </style>
   <script lang="js">
-function htmlEntities(str) {
-    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-          document.addEventListener('DOMContentLoaded', (event) => {
-            
-            fetch(window.location + 'code').then(function(response) {
-          return response.json();
-        }).then(function(data) {
-          if(Array.isArray(data)) {
-            console.log(data);
-            for(let file of data) {
-              const pathArray = file.path.split('/');
-            document.querySelector("body").innerHTML += `
-            <div class="code-block">
-      <pre><code class="lang-${file.ext}">/* \n name: ${pathArray[pathArray.length -1]}\n path: ${file.path} \n*/</code> </pre>
-      <pre class="line-numbers"><code class="code lang-${file.ext}">${htmlEntities(file.code)}</code></pre>
-    </div>
-            `
-            }
-          } else {
-            const pathArray = data.path.split('/');
-            document.querySelector("body").innerHTML = `
-            <div class="code-block">
-      <pre><code class="lang-${data.ext}">/* \n name: ${pathArray[pathArray.length -1]}\n path: ${data.path} \n*/</code> </pre>
-      <pre class="line-numbers"><code class="code lang-${data.ext}">${htmlEntities(file.code)}</code></pre>
-    </div>
-            `
-          }
-          Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/';
-          Prism.highlightAll();
+    function htmlEntities(str) {
+        return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+              document.addEventListener('DOMContentLoaded', (event) => {
 
-        }).catch(function() {
-          console.log("Booo");
+                fetch(window.location + 'code').then(function(response) {
+              return response.json();
+            }).then(function(data) {
+              if(Array.isArray(data)) {
+                console.log(data);
+                for(let file of data) {
+                  const pathArray = file.path.split('/');
+                document.querySelector("div#content").innerHTML += `
+
+                <div class="code-block">
+          <pre><code class="lang-${file.ext}">/* \n name: ${pathArray[pathArray.length -1]}\n path: ${file.path} \n*/</code> </pre>
+          <pre class="line-numbers"><code class="code lang-${file.ext}">${htmlEntities(file.code)}</code></pre>
+        </div>
+                `
+                }
+              } else {
+                const pathArray = data.path.split('/');
+                document.querySelector("div#content").innerHTML = `
+                <div class="code-block">
+          <pre><code class="lang-${data.ext}">/* \n name: ${pathArray[pathArray.length -1]}\n path: ${data.path} \n*/</code> </pre>
+          <pre class="line-numbers"><code class="code lang-${data.ext}">${htmlEntities(file.code)}</code></pre>
+        </div>
+                `
+              }
+              Prism.plugins.autoloader.languages_path = 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/';
+              Prism.highlightAll();
+
+            }).catch(function() {
+              console.log("Booo");
+            });
         });
-    });
   </script>
-  <body></body>
+  <body>
+    <body>
+      <div id="content"></div>
+    </body>
+  </body>
 </html>
