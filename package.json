@@ -16,7 +16,7 @@
   ],
   "icon": "images/icon.png",
   "engines": {
-    "vscode": "^1.71.0"
+    "vscode": "^1.50.0"
   },
   "categories": [
     "Other"
@@ -79,7 +79,7 @@
     "test-compile": "tsc -p ./",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
+    "pretest": "npm run test-compile && npm run lint",
     "lint": "eslint src --ext ts",
     "test": "node ./out/test/runTest.js"
   },

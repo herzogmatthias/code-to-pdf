@@ -24,9 +24,9 @@ export async function buildTree(rootPath: string) {
         const extension = extname(childNode.path);
         childNode.ext = isDirectory ? undefined : extension.substring(1);
 
-        const isFileBockled = settings.ignoredFileExtensions
+        const isFileBockled = !settings.ignoredFileExtensions
           ? false
-          : settings.ignoredFileExtensions!.includes(extension);
+          : settings.ignoredFileExtensions.includes(extension);
         if (!isFileBockled) {
           currentNode.children.push(childNode);
           filePromises.push({
