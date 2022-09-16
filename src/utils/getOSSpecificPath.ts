@@ -62,7 +62,7 @@ async function getPathWindows() {
     return undefined;
   }
 
-  const path = browser.trim().substr(6);
+  const path = browser.trim().substring(6);
   return normalize(path.trim());
 }
 

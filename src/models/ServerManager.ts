@@ -32,8 +32,6 @@ export class ServerManager {
     }).listen(0);
   }
   private async sendCode(res: ServerResponse) {
-    console.log(res);
-    console.log(this.uri);
     let isDir = statSync(this.uri.fsPath).isDirectory();
     let tree: TreeNode | undefined = undefined;
     let flattendArray: Array<TreeNode> = [];
@@ -62,7 +60,6 @@ export class ServerManager {
   }
 
   private serveHTML(res: ServerResponse) {
-    console.log(this.htmlPath);
     readFile(
       this.htmlPath ? this.htmlPath : join(__dirname, "template", "index.html"),
       function (err, data) {

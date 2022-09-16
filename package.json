@@ -2,7 +2,7 @@
   "name": "codetopdf",
   "displayName": "Code to Pdf",
   "description": "Generate a Pdf from Code",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "publisher": "herzogmatthias",
   "repository": {
     "url": "https://github.com/herzogmatthias/code-to-pdf"
@@ -89,11 +89,12 @@
     "@types/mocha": "^9.1.1",
     "@types/node": "^15.8.0",
     "@types/node-fetch": "^2.6.2",
-    "@types/vscode": "^1.71.0",
+    "@types/vscode": "^1.50.0",
     "@types/which": "^2.0.1",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
     "chai": "^4.3.6",
+    "encoding": "^0.1.13",
     "eslint": "^8.23.1",
     "glob": "^8.0.3",
     "html-loader": "^4.1.0",

@@ -14,7 +14,6 @@ export function activate(context: vscode.ExtensionContext) {
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
 
-  console.log(context);
   let disposable = vscode.commands.registerCommand(
     "codetopdf.convert",
     (uri: vscode.Uri) => codeToPdf(uri)
